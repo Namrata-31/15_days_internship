@@ -1,0 +1,79 @@
+MAIN ACTIVITY
+
+package com.example.mylist;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.widget.ListView;
+
+public class MainActivity extends AppCompatActivity {
+ListView lst;
+int image[]={R.drawable.apple,R.drawable.banana,R.drawable.lichi,R.drawable.orange,R.drawable.grapes,R.drawable.pear,R.drawable.strawberry};
+String[] name={"APPLE","BANANA","LICHI","ORANGE","GRAPES","PEAR","STRAWBERRY"} ;
+    private Object Myadapter;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+     lst=findViewById(R.id.lst);
+
+     Myadapter myadapter=new Myadapter(MainActivity.this,image,name);
+     lst.setAdapter(myadapter);
+    }
+}
+
+
+
+ADAPTER CODE
+
+package com.example.mylist;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+public class Myadapter extends BaseAdapter {
+    Context context;
+    int[] image;
+    String name[];
+    LayoutInflater layoutInflater;
+
+    public Myadapter(Context content,int[] image, String[] name){
+        this.context=content;
+        this.image=image;
+        this.name=name;
+        layoutInflater=(LayoutInflater.from(context));
+    }
+
+    @Override
+    public int getCount() {
+        return 0;
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return null;
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return 0;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        convertView= layoutInflater.inflate(R.layout.row_list,null);
+        ImageView img1=(ImageView)convertView.findViewById(R.id.img1);
+        TextView tv1=(TextView)convertView.findViewById(R.id.tv1);
+        tv1.setText(name[position]);
+        img1.setImageResource(image[position]);
+
+        return convertView;
+    }
+}
